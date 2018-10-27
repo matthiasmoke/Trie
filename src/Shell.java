@@ -27,7 +27,7 @@ public final class Shell {
     }
 
     /**
-     * Evals the input of the user and executes the given command
+     *Evals the input of the user and executes the given command
      * @param input userinput
      */
     private static void evalInput(String input){
@@ -98,7 +98,13 @@ public final class Shell {
         sc.close();
     }
 
+    /**
+     *Prints a info-message for the user
+     */
     private static void printHelpInfo() {
-        System.out.println("");
+        System.out.println("Following commands can be executed:");
+        for(String s : commands){
+            System.out.println("- " + s);
+        }
     }
 }

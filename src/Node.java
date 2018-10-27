@@ -19,7 +19,7 @@ public class Node {
 
 
     /**
-     * Sets the reference to a childnode for the given character
+     *Sets the reference to a childnode for the given character
      * @param ch character of childnode
      * @param child node to set the reference to
      */
@@ -28,7 +28,7 @@ public class Node {
     }
 
     /**
-     * Gets the childnode for a certain character
+     *Gets the childnode for a certain character
      * @param ch character of childnode
      * @return childnode or null if no child is set
      */
@@ -37,7 +37,7 @@ public class Node {
     }
 
     /**
-     * Gets the end-node for the given keyword
+     * ets the end-node for the given keyword
      * @param key keyword
      * @return end-node or null if no node is found
      */
@@ -58,7 +58,7 @@ public class Node {
     }
 
     /**
-     * Removes the point value and children of the node
+     *Removes the point value and children of the node
      */
     public void remove(){
 
@@ -73,7 +73,7 @@ public class Node {
     }
 
     /**
-     * Sets the points value of the node
+     *Sets the points value of the node
      * @param points
      */
     public  void setPoints(Integer points){
@@ -81,7 +81,7 @@ public class Node {
     }
 
     /**
-     * Returns the points value of the node
+     *Returns the points value of the node
      * @return
      */
     public Integer getPoints(){
@@ -89,7 +89,7 @@ public class Node {
     }
 
     /**
-     * Gets the position of the given char in the children array
+     *Gets the position of the given char in the children array
      * @param c char
      * @return node position of given char
      */

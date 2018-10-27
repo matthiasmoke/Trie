@@ -46,7 +46,7 @@ public class Trie {
     }
 
     /**
-     * Searches for the end-node of the keyword and gets points
+     *Searches for the end-node of the keyword and gets points
      * @param key keyword
      * @return points or null if no node is found
      */
