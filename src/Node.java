@@ -4,7 +4,6 @@ public class Node {
     private Node[] children;
     private Node parent;
     private char ch;
-    private final char[] ALPHABET = ("abcdefghijklmnopqrstuvwxyz").toCharArray();
 
     public Node(){
         this.children = new Node[26];
@@ -14,6 +13,7 @@ public class Node {
         this.ch = ch;
         this.parent = parent;
         this.children = new Node[26];
+        parent.setChild(ch, this);
     }
 
 
@@ -53,7 +53,6 @@ public class Node {
 
             return null;
         }
-
         return currChild;
     }
 
@@ -61,15 +60,30 @@ public class Node {
      *Removes the point value and children of the node
      */
     public void remove(){
-
+        points = null;
+        children = null;
     }
 
     /**
      *
-     * @return
+     * @return presentation of the current node as string
      */
     public String toString(){
-        return "";
+        StringBuilder b = new StringBuilder();
+        for(int i = 0; i < children.length; i++){
+            if(children[i] != null){
+
+                b.append("(" +children[i].ch);
+                b.append(children[i].toString());
+
+                if(hasPoints()){
+                    b.append("[" + points + "]");
+                }
+
+                b.append(")");
+            }
+        }
+        return b.toString();
     }
 
     /**
@@ -85,7 +99,7 @@ public class Node {
      * @return
      */
     public Integer getPoints(){
-        return  points;
+        return points;
     }
 
     /**
@@ -93,13 +107,15 @@ public class Node {
      * @param c char
      * @return node position of given char
      */
-    private int getArrayPositionOfChar(char c) throws IllegalArgumentException{
-        for(int i = 0; i < ALPHABET.length; i++){
-            if(ALPHABET[i] == c){
-                return i;
-            }
-        }
+    private int getArrayPositionOfChar(char c){
+        int position = (int) c - (int)('a');
+        return position;
+    }
 
-        throw new IllegalArgumentException();
+    private boolean hasPoints(){
+        if(points != null && points > 0) {
+            return true;
+        }
+        return false;
     }
 }

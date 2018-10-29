@@ -7,16 +7,32 @@ public class Trie {
     }
 
     /**
-     *
-     * @param key
-     * @param points
-     * @return
+     *Adds a new node to position key with the value points
+     * @param key name of student
+     * @param points points of student
+     * @return true if new node is added successfully
      */
     public  boolean add(String key, Integer points){
 
-        if(root.find(key).getPoints() > 0){
+        char[] keyChars = key.toCharArray();
+        Node currNode = root;
+        Node childNode = null;
+
+        //navigate through the tree to find/create end node of key
+        for(int i = 0; i < keyChars.length; i++){
+
+            childNode = currNode.getChild(keyChars[i]);
+            if(childNode == null) {
+                childNode = new Node(keyChars[i], currNode);
+            }
+            currNode = childNode;
+        }
+
+        if(currNode.getPoints() != null){
             return false;
         }
+        currNode.setPoints(points);
+        return true;
     }
 
     /**
@@ -25,23 +41,29 @@ public class Trie {
      * @return
      */
     public boolean remove(String key){
+        Node nodeToRemove = root.find(key);
 
+        if(nodeToRemove != null){
+            nodeToRemove.remove();
+            return  true;
+        }
+        return false;
     }
 
     /**
-     *
-     * @param key
-     * @param points
-     * @return
+     *Changes the point value of the given node
+     * @param key name of student
+     * @param points point value
+     * @return true if points are changed successfully
      */
     public boolean change(String key, Integer points){
 
         Node nodeToChange = root.find(key);
 
         if(nodeToChange != null){
-
+            nodeToChange.setPoints(points);
+            return true;
         }
-
         return false;
     }
 
@@ -56,12 +78,16 @@ public class Trie {
     }
 
     /**
-     *
-     * @return
+     *Show
+     * @return a string that presents the current trie
      */
-    public  String toString(){
-
+    public String toString(){
+        if(root != null){
+            String output = "+";
+            output += root.toString();
+            return output;
+        }else{
+            return "";
+        }
     }
-
-
 }

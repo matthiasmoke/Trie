@@ -13,11 +13,16 @@ public final class Shell {
         runShell(shellReader);
     }
 
+    /**
+     *Method that runns the shell
+     * @param reader Reader for user input
+     * @throws IOException
+     */
     private  static  void runShell(BufferedReader reader) throws IOException{
         boolean run = true;
 
         while (run){
-            System.out.println("trie> ");
+            System.out.print("trie> ");
             String input = reader.readLine();
 
             if(input != null) {
@@ -79,7 +84,7 @@ public final class Shell {
                     break;
 
                 case "trie":
-                    trie.toString();
+                    System.out.println(trie.toString());
                     break;
 
                 case "help":
@@ -87,14 +92,13 @@ public final class Shell {
                     break;
 
                 case "quit":
-
+                    System.exit(0);
                     break;
 
                 default:
                     System.out.println("Error! No valid input");
             }
         }
-
         sc.close();
     }
 
