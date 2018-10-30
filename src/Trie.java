@@ -78,7 +78,7 @@ public class Trie {
     }
 
     /**
-     *Show
+     *Represents the trie as string
      * @return a string that presents the current trie
      */
     public String toString(){

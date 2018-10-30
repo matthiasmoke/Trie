@@ -37,12 +37,14 @@ public class Node {
     }
 
     /**
-     * ets the end-node for the given keyword
+     *Gets the end-node for the given keyword
      * @param key keyword
      * @return end-node or null if no node is found
      */
     public Node find(String key){
         char[] characters = key.toLowerCase().toCharArray();
+
+        //Navigate through the trie
         Node currChild = getChild(characters[0]);
 
         for(int i = 1; i < characters.length; i++){
@@ -61,11 +63,10 @@ public class Node {
      */
     public void remove(){
         points = null;
-        children = null;
     }
 
     /**
-     *
+     *Represents the node as string
      * @return presentation of the current node as string
      */
     public String toString(){
@@ -76,7 +77,7 @@ public class Node {
                 b.append("(" +children[i].ch);
                 b.append(children[i].toString());
 
-                if(hasPoints()){
+                if(this.hasPoints()){
                     b.append("[" + points + "]");
                 }
 
@@ -110,6 +111,10 @@ public class Node {
     private int getArrayPositionOfChar(char c){
         int position = (int) c - (int)('a');
         return position;
+    }
+
+    private void cleanUp(){
+
     }
 
     private boolean hasPoints(){

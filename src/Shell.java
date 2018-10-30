@@ -6,10 +6,12 @@ import java.util.Scanner;
 public final class Shell {
 
     private static Trie trie;
-    private static final String[] commands = {"new", "add <name> <points>", "change <name> <points>", "delete <name>", "points <points>", "trie", "help", "quit"};
+    private static boolean run;
+
 
     public static void main(String[] args) throws IOException {
-        BufferedReader shellReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader shellReader = new BufferedReader(
+                new InputStreamReader(System.in));
         runShell(shellReader);
     }
 
@@ -19,7 +21,7 @@ public final class Shell {
      * @throws IOException
      */
     private  static  void runShell(BufferedReader reader) throws IOException{
-        boolean run = true;
+        run = true;
 
         while (run){
             System.out.print("trie> ");
@@ -57,7 +59,10 @@ public final class Shell {
                         points = sc.nextInt();
 
                     if(!studentName.equals("") && points > 0){
-                        trie.add(studentName, points);
+                        if(!trie.add(studentName, points)){
+                            System.out.println("Error! Could not add " +
+                                    studentName);
+                        }
                     }
                     break;
 
@@ -68,14 +73,22 @@ public final class Shell {
                     if (sc.hasNextInt())
                         points = sc.nextInt();
 
-                    if(!studentName.equals("") && points > 0){
-                        trie.change(studentName, points);
+                    if(!studentName.equals("") && points >= 0){
+
+                        if(!trie.change(studentName, points)){
+                            System.out.println("Error! Could not change " +
+                                    studentName);
+                        }
                     }
                     break;
 
                 case "delete":
                     if(sc.hasNext())
-                        trie.remove(sc.next());
+                        studentName = sc.next();
+                        if(!trie.remove(studentName)){
+                            System.out.println("Error! Data could not delete " +
+                                    studentName);
+                        }
                     break;
 
                 case "points":
@@ -92,7 +105,7 @@ public final class Shell {
                     break;
 
                 case "quit":
-                    System.exit(0);
+                    run = false;
                     break;
 
                 default:
@@ -106,6 +119,11 @@ public final class Shell {
      *Prints a info-message for the user
      */
     private static void printHelpInfo() {
+
+        String[] commands = {"new", "add <name> <points>",
+                "change <name> <points>", "delete <name>", "points <points>",
+                "trie", "help", "quit"};
+
         System.out.println("Following commands can be executed:");
         for(String s : commands){
             System.out.println("- " + s);
