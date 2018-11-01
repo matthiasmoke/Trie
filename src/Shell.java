@@ -124,7 +124,7 @@ public final class Shell {
 
     private static void delete(String name){
         if(!trie.remove(name)){
-            System.out.println("Error! Data could not delete " + name);
+            System.out.println("Error! Could not delete " + name);
         }
     }
 

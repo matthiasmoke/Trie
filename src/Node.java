@@ -49,8 +49,9 @@ public class Node {
 
             if(currChild != null){
                 currChild = currChild.getChild(characters[i]);
+            }else{
+                return null;
             }
-            return null;
         }
         return currChild;
     }
@@ -60,6 +61,7 @@ public class Node {
      */
     public void remove(){
         points = null;
+        cleanUp();
     }
 
     /**
@@ -113,7 +115,24 @@ public class Node {
     }
 
     private void cleanUp(){
+        Node currNode = parent;
+        char currChar = this.ch;
 
+        while (currNode.hasChildren() == false){
+            currChar  = currNode.ch;
+            currNode = currNode.parent;
+            currNode.children[getArrayPositionOfChar(currChar)] = null;
+        }
+        currNode.children[getArrayPositionOfChar(currChar)] = null;
+    }
+
+    private boolean hasChildren(){
+        for(int i = 0; i < children.length; i++){
+            if(children[i] != null){
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean hasPoints(){
