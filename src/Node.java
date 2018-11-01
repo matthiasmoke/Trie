@@ -117,13 +117,25 @@ public class Node {
     private void cleanUp(){
         Node currNode = parent;
         char currChar = this.ch;
+        boolean remove = true;
 
-        while (currNode.hasChildren() == false){
-            currChar  = currNode.ch;
-            currNode = currNode.parent;
-            currNode.children[getArrayPositionOfChar(currChar)] = null;
+        while (remove) {
+            currNode.setChild(currChar, null);
+
+            if (currNode.hasChildren()) {
+                remove = false;
+            }
+
+            if(currNode.ch != '\u0000'){
+                currChar = currNode.ch;
+            }else{
+                remove = false;
+            }
+
+            if(currNode.parent != null){
+                currNode = currNode.parent;
+            }
         }
-        currNode.children[getArrayPositionOfChar(currChar)] = null;
     }
 
     private boolean hasChildren(){
