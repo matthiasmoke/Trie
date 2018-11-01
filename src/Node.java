@@ -16,8 +16,6 @@ public class Node {
         parent.setChild(ch, this);
     }
 
-
-
     /**
      *Sets the reference to a childnode for the given character
      * @param ch character of childnode
@@ -52,7 +50,6 @@ public class Node {
             if(currChild != null){
                 currChild = currChild.getChild(characters[i]);
             }
-
             return null;
         }
         return currChild;
@@ -71,16 +68,18 @@ public class Node {
      */
     public String toString(){
         StringBuilder b = new StringBuilder();
+
+        //Create string for this node and execute toString() for children
         for(int i = 0; i < children.length; i++){
             if(children[i] != null){
 
                 b.append("(" +children[i].ch);
                 b.append(children[i].toString());
 
-                if(this.hasPoints()){
-                    b.append("[" + points + "]");
+                if(children[i].hasPoints()){
+                    int value = children[i].getPoints();
+                    b.append("[" + value + "]");
                 }
-
                 b.append(")");
             }
         }
@@ -118,7 +117,7 @@ public class Node {
     }
 
     private boolean hasPoints(){
-        if(points != null && points > 0) {
+        if(points != null && points >= 0) {
             return true;
         }
         return false;

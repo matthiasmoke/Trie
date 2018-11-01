@@ -52,43 +52,38 @@ public final class Shell {
                     break;
 
                 case "add":
-                    if(sc.hasNext())
+                    if(sc.hasNext()) {
                         studentName = sc.next();
+                    }
 
-                    if (sc.hasNextInt())
+                    if (sc.hasNextInt()) {
                         points = sc.nextInt();
+                    }
 
-                    if(!studentName.equals("") && points > 0){
-                        if(!trie.add(studentName, points)){
-                            System.out.println("Error! Could not add " +
-                                    studentName);
-                        }
+                    if(!studentName.equals("") && points >= 0){
+                        add(studentName, points);
                     }
                     break;
 
                 case "change":
-                    if(sc.hasNext())
+                    if(sc.hasNext()) {
                         studentName = sc.next();
+                    }
 
-                    if (sc.hasNextInt())
+                    if (sc.hasNextInt()) {
                         points = sc.nextInt();
+                    }
 
                     if(!studentName.equals("") && points >= 0){
-
-                        if(!trie.change(studentName, points)){
-                            System.out.println("Error! Could not change " +
-                                    studentName);
-                        }
+                        change(studentName, points);
                     }
                     break;
 
                 case "delete":
-                    if(sc.hasNext())
+                    if(sc.hasNext()) {
                         studentName = sc.next();
-                        if(!trie.remove(studentName)){
-                            System.out.println("Error! Data could not delete " +
-                                    studentName);
-                        }
+                    }
+                    delete(studentName);
                     break;
 
                 case "points":
@@ -113,6 +108,24 @@ public final class Shell {
             }
         }
         sc.close();
+    }
+
+    private static void add(String name, Integer points){
+        if(!trie.add(name, points)){
+            System.out.println("Error! Could not add " + name);
+        }
+    }
+
+    private static void change(String name, Integer points){
+        if(!trie.change(name, points)){
+            System.out.println("Error! Could not change " + name);
+        }
+    }
+
+    private static void delete(String name){
+        if(!trie.remove(name)){
+            System.out.println("Error! Data could not delete " + name);
+        }
     }
 
     /**
