@@ -89,7 +89,13 @@ public final class Shell {
 
                 case "points":
                     if(sc.hasNext()) {
-                        trie.points(sc.next());
+                        int p = trie.points(sc.next());
+                        if(p >= 0) {
+                            System.out.println(p);
+                        } else {
+                            System.out.println("Error! No value saved");
+                        }
+
                     }
                     break;
 

@@ -73,8 +73,11 @@ public class Trie {
      * @return points or null if no node is found
      */
     public Integer points(String key) {
-        int points = root.find(key).getPoints();
-        return points;
+        Node n = root.find(key);
+        if(n != null) {
+            return n.getPoints();
+        }
+            return -1;
     }
 
     /**

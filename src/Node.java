@@ -125,7 +125,7 @@ public class Node {
         while (remove) {
             currNode.setChild(currChar, null);
 
-            if (currNode.hasChildren() || currNode.points >= 0) {
+            if (currNode.hasChildren() || currNode.points != null) {
                 remove = false;
             }
 
