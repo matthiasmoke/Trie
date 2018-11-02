@@ -20,10 +20,11 @@ public final class Shell {
      * @param reader Reader for user input
      * @throws IOException
      */
-    private  static  void runShell(BufferedReader reader) throws IOException{
+    private  static  void runShell(BufferedReader reader) throws IOException {
         run = true;
+        trie = new Trie();
 
-        while (run){
+        while (run) {
             System.out.print("trie> ");
             String input = reader.readLine();
 
@@ -37,7 +38,7 @@ public final class Shell {
      *Evals the input of the user and executes the given command
      * @param input userinput
      */
-    private static void evalInput(String input){
+    private static void evalInput(String input) {
         Scanner sc =  new Scanner(input);
         sc.useDelimiter("\\s+");
 
@@ -60,7 +61,7 @@ public final class Shell {
                         points = sc.nextInt();
                     }
 
-                    if(!studentName.equals("") && points >= 0){
+                    if(!studentName.equals("") && points >= 0) {
                         add(studentName, points);
                     }
                     break;
@@ -74,7 +75,7 @@ public final class Shell {
                         points = sc.nextInt();
                     }
 
-                    if(!studentName.equals("") && points >= 0){
+                    if(!studentName.equals("") && points >= 0) {
                         change(studentName, points);
                     }
                     break;
@@ -87,8 +88,9 @@ public final class Shell {
                     break;
 
                 case "points":
-                    if(sc.hasNext())
+                    if(sc.hasNext()) {
                         trie.points(sc.next());
+                    }
                     break;
 
                 case "trie":
@@ -104,32 +106,36 @@ public final class Shell {
                     break;
 
                 default:
-                    System.out.println("Error! No valid input");
+                    printErrorMessage();
             }
         }
         sc.close();
     }
 
-    private static void add(String name, Integer points){
-        if(!trie.add(name, points)){
+    private static void add(String name, Integer points) {
+        if(!trie.add(name, points)) {
             System.out.println("Error! Could not add " + name);
         }
     }
 
-    private static void change(String name, Integer points){
-        if(!trie.change(name, points)){
+    private static void change(String name, Integer points) {
+        if(!trie.change(name, points)) {
             System.out.println("Error! Could not change " + name);
         }
     }
 
-    private static void delete(String name){
-        if(!trie.remove(name)){
+    private static void delete(String name) {
+        if(!trie.remove(name)) {
             System.out.println("Error! Could not delete " + name);
         }
     }
 
+    private static void printErrorMessage() {
+        System.out.println("Error! No valid input");
+    }
+
     /**
-     *Prints a info-message for the user
+     *Prints an info-message for the user
      */
     private static void printHelpInfo() {
 
@@ -138,7 +144,7 @@ public final class Shell {
                 "trie", "help", "quit"};
 
         System.out.println("Following commands can be executed:");
-        for(String s : commands){
+        for(String s : commands) {
             System.out.println("- " + s);
         }
     }

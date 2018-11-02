@@ -2,7 +2,7 @@ public class Trie {
 
     private  Node root;
 
-    public  Trie(){
+    public  Trie() {
         root = new Node();
     }
 
@@ -12,14 +12,14 @@ public class Trie {
      * @param points points of student
      * @return true if new node is added successfully
      */
-    public  boolean add(String key, Integer points){
+    public  boolean add(String key, Integer points) {
 
         char[] keyChars = key.toCharArray();
         Node currNode = root;
         Node childNode = null;
 
         //navigate through the tree to find/create end node of key
-        for(int i = 0; i < keyChars.length; i++){
+        for(int i = 0; i < keyChars.length; i++) {
 
             childNode = currNode.getChild(keyChars[i]);
             if(childNode == null) {
@@ -28,7 +28,7 @@ public class Trie {
             currNode = childNode;
         }
 
-        if(currNode.getPoints() != null){
+        if(currNode.getPoints() != null) {
             return false;
         }
         currNode.setPoints(points);
@@ -36,14 +36,14 @@ public class Trie {
     }
 
     /**
-     *
+     *Deletes the given node and all unnecessary related nodes
      * @param key
      * @return
      */
-    public boolean remove(String key){
+    public boolean remove(String key) {
         Node nodeToRemove = root.find(key);
 
-        if(nodeToRemove != null){
+        if(nodeToRemove != null) {
             nodeToRemove.remove();
             return  true;
         }
@@ -56,11 +56,11 @@ public class Trie {
      * @param points point value
      * @return true if points are changed successfully
      */
-    public boolean change(String key, Integer points){
+    public boolean change(String key, Integer points) {
 
         Node nodeToChange = root.find(key);
 
-        if(nodeToChange != null){
+        if(nodeToChange != null) {
             nodeToChange.setPoints(points);
             return true;
         }
@@ -72,7 +72,7 @@ public class Trie {
      * @param key keyword
      * @return points or null if no node is found
      */
-    public Integer points(String key){
+    public Integer points(String key) {
         int points = root.find(key).getPoints();
         return points;
     }
@@ -81,12 +81,12 @@ public class Trie {
      *Represents the trie as string
      * @return a string that presents the current trie
      */
-    public String toString(){
+    public String toString() {
         if(root != null){
             String output = "+";
             output += root.toString();
             return output;
-        }else{
+        } else {
             return "";
         }
     }
