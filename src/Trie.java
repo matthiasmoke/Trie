@@ -1,7 +1,13 @@
+/**
+ * Trie data structure for saving student data
+ */
 public class Trie {
 
     private  Node root;
 
+    /**
+     *Creates a new instance of Trie
+     */
     public  Trie() {
         root = new Node();
     }
@@ -19,16 +25,16 @@ public class Trie {
         Node childNode = null;
 
         //navigate through the tree to find/create end node of key
-        for(int i = 0; i < keyChars.length; i++) {
+        for (int i = 0; i < keyChars.length; i++) {
 
             childNode = currNode.getChild(keyChars[i]);
-            if(childNode == null) {
+            if (childNode == null) {
                 childNode = new Node(keyChars[i], currNode);
             }
             currNode = childNode;
         }
 
-        if(currNode.getPoints() != null) {
+        if (currNode.getPoints() != null) {
             return false;
         }
         currNode.setPoints(points);
@@ -43,7 +49,7 @@ public class Trie {
     public boolean remove(String key) {
         Node nodeToRemove = root.find(key);
 
-        if(nodeToRemove != null) {
+        if (nodeToRemove != null) {
             nodeToRemove.remove();
             return  true;
         }
@@ -60,7 +66,7 @@ public class Trie {
 
         Node nodeToChange = root.find(key);
 
-        if(nodeToChange != null) {
+        if (nodeToChange != null) {
             nodeToChange.setPoints(points);
             return true;
         }
@@ -74,7 +80,7 @@ public class Trie {
      */
     public Integer points(String key) {
         Node n = root.find(key);
-        if(n != null) {
+        if (n != null) {
             return n.getPoints();
         }
             return -1;
@@ -85,7 +91,7 @@ public class Trie {
      * @return a string that presents the current trie
      */
     public String toString() {
-        if(root != null){
+        if (root != null){
             String output = "+";
             output += root.toString();
             return output;

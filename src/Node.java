@@ -1,3 +1,6 @@
+/**
+ *Represents a node in the Trie
+ */
 public class Node {
 
     private Integer points;
@@ -5,10 +8,18 @@ public class Node {
     private Node parent;
     private char ch;
 
-    public Node(){
+    /**
+     *Constructor for creating a root-node
+     */
+    public Node() {
         this.children = new Node[26];
     }
 
+    /**
+     *Constructor for creating a regular node
+     * @param ch represents the char that points to the node
+     * @param parent is the superordinate node
+     */
     public Node(char ch, Node parent) {
         this.ch = ch;
         this.parent = parent;
@@ -45,9 +56,9 @@ public class Node {
         //Navigate through the trie
         Node currChild = getChild(characters[0]);
 
-        for(int i = 1; i < characters.length; i++) {
+        for (int i = 1; i < characters.length; i++) {
 
-            if(currChild != null) {
+            if (currChild != null) {
                 currChild = currChild.getChild(characters[i]);
             } else {
                 return null;
@@ -72,13 +83,13 @@ public class Node {
         StringBuilder b = new StringBuilder();
 
         //Create string for this node and execute toString() for children
-        for(int i = 0; i < children.length; i++) {
-            if(children[i] != null){
+        for (int i = 0; i < children.length; i++) {
+            if (children[i] != null){
 
                 b.append("(" +children[i].ch);
                 b.append(children[i].toString());
 
-                if(children[i].hasPoints()) {
+                if (children[i].hasPoints()) {
                     int value = children[i].getPoints();
                     b.append("[" + value + "]");
                 }
@@ -98,7 +109,7 @@ public class Node {
 
     /**
      *Returns the points value of the node
-     * @return
+     * @return point value of the node
      */
     public Integer getPoints() {
         return points;
@@ -110,7 +121,7 @@ public class Node {
      * @return node position of given char
      */
     private int getArrayPositionOfChar(char c) {
-        int position = (int) c - (int)('a');
+        int position = (int) c - (int) ('a');
         return position;
     }
 
@@ -129,21 +140,21 @@ public class Node {
                 remove = false;
             }
 
-            if(currNode.ch != '\u0000') {
+            if (currNode.ch != '\u0000') {
                 currChar = currNode.ch;
             } else {
                 remove = false;
             }
 
-            if(currNode.parent != null) {
+            if (currNode.parent != null) {
                 currNode = currNode.parent;
             }
         }
     }
 
     private boolean hasChildren() {
-        for(int i = 0; i < children.length; i++) {
-            if(children[i] != null) {
+        for (int i = 0; i < children.length; i++) {
+            if (children[i] != null) {
                 return true;
             }
         }
@@ -151,7 +162,7 @@ public class Node {
     }
 
     private boolean hasPoints() {
-        if(points != null && points >= 0) {
+        if (points != null && points >= 0) {
             return true;
         }
         return false;

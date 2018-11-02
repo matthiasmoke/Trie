@@ -3,12 +3,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/**
+ *Main class for representing shell
+ */
 public final class Shell {
 
     private static Trie trie;
     private static boolean run;
 
+    /**
+     *Private constructor
+     */
+    private Shell(){
 
+    }
+
+    /**
+     *Main method that executes the shell
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         BufferedReader shellReader = new BufferedReader(
                 new InputStreamReader(System.in));
@@ -28,7 +42,7 @@ public final class Shell {
             System.out.print("trie> ");
             String input = reader.readLine();
 
-            if(input != null) {
+            if (input != null) {
                 evalInput(input);
             }
         }
@@ -42,7 +56,7 @@ public final class Shell {
         Scanner sc =  new Scanner(input);
         sc.useDelimiter("\\s+");
 
-        if(sc.hasNext()){
+        if (sc.hasNext()){
 
             String studentName = "";
             int points = -1;
@@ -53,7 +67,7 @@ public final class Shell {
                     break;
 
                 case "add":
-                    if(sc.hasNext()) {
+                    if (sc.hasNext()) {
                         studentName = sc.next();
                     }
 
@@ -61,13 +75,13 @@ public final class Shell {
                         points = sc.nextInt();
                     }
 
-                    if(!studentName.equals("") && points >= 0) {
+                    if (!studentName.equals("") && points >= 0) {
                         add(studentName, points);
                     }
                     break;
 
                 case "change":
-                    if(sc.hasNext()) {
+                    if (sc.hasNext()) {
                         studentName = sc.next();
                     }
 
@@ -75,22 +89,22 @@ public final class Shell {
                         points = sc.nextInt();
                     }
 
-                    if(!studentName.equals("") && points >= 0) {
+                    if (!studentName.equals("") && points >= 0) {
                         change(studentName, points);
                     }
                     break;
 
                 case "delete":
-                    if(sc.hasNext()) {
+                    if (sc.hasNext()) {
                         studentName = sc.next();
                     }
                     delete(studentName);
                     break;
 
                 case "points":
-                    if(sc.hasNext()) {
+                    if (sc.hasNext()) {
                         int p = trie.points(sc.next());
-                        if(p >= 0) {
+                        if (p >= 0) {
                             System.out.println(p);
                         } else {
                             System.out.println("Error! No value saved");
@@ -119,19 +133,19 @@ public final class Shell {
     }
 
     private static void add(String name, Integer points) {
-        if(!trie.add(name, points)) {
+        if (!trie.add(name, points)) {
             System.out.println("Error! Could not add " + name);
         }
     }
 
     private static void change(String name, Integer points) {
-        if(!trie.change(name, points)) {
+        if (!trie.change(name, points)) {
             System.out.println("Error! Could not change " + name);
         }
     }
 
     private static void delete(String name) {
-        if(!trie.remove(name)) {
+        if (!trie.remove(name)) {
             System.out.println("Error! Could not delete " + name);
         }
     }
@@ -150,7 +164,7 @@ public final class Shell {
                 "trie", "help", "quit"};
 
         System.out.println("Following commands can be executed:");
-        for(String s : commands) {
+        for (String s : commands) {
             System.out.println("- " + s);
         }
     }
