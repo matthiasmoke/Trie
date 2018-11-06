@@ -75,9 +75,7 @@ public final class Shell {
                         points = sc.nextInt();
                     }
 
-                    if (!studentName.equals("") && points >= 0) {
-                        add(studentName, points);
-                    }
+                    add(studentName, points);
                     break;
 
                 case "change":
@@ -89,9 +87,7 @@ public final class Shell {
                         points = sc.nextInt();
                     }
 
-                    if (!studentName.equals("") && points >= 0) {
-                        change(studentName, points);
-                    }
+                    change(studentName, points);
                     break;
 
                 case "delete":
@@ -133,14 +129,22 @@ public final class Shell {
     }
 
     private static void add(String name, Integer points) {
-        if (!trie.add(name, points)) {
-            System.out.println("Error! Could not add " + name);
+        if (!name.equals("") && points >= 0) {
+            if (!trie.add(name, points)) {
+                System.out.println("Error! Could not add " + name);
+            }
+        } else {
+            printErrorMessage();
         }
     }
 
     private static void change(String name, Integer points) {
-        if (!trie.change(name, points)) {
-            System.out.println("Error! Could not change " + name);
+        if (!name.equals("") && points >= 0) {
+            if (!trie.change(name, points)) {
+                System.out.println("Error! Could not change " + name);
+            }
+        } else {
+            printErrorMessage();
         }
     }
 

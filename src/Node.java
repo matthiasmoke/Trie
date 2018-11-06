@@ -81,20 +81,24 @@ public class Node {
      */
     public String toString() {
         StringBuilder b = new StringBuilder();
-
+        boolean hasChildren = false;
         //Create string for this node and execute toString() for children
         for (int i = 0; i < children.length; i++) {
             if (children[i] != null){
-
-                b.append("(" +children[i].ch);
-                b.append(children[i].toString());
+                hasChildren = true;
+                b.append(children[i].ch);
 
                 if (children[i].hasPoints()) {
                     int value = children[i].getPoints();
                     b.append("[" + value + "]");
                 }
-                b.append(")");
+
+                b.append(children[i].toString());
             }
+        }
+
+        if (hasChildren) {
+            addBrackets(b);
         }
         return b.toString();
     }
@@ -166,5 +170,20 @@ public class Node {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Adds brackets in the front and at the end
+     * @param builder Stringbuilder to append brackets to
+     * @return String with added brackets
+     */
+    private String addBrackets(StringBuilder builder) {
+        if (builder != null) {
+            builder.insert(0, "(");
+            builder.append(")");
+            return builder.toString();
+        } else {
+            return "";
+        }
     }
 }
