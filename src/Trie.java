@@ -43,13 +43,13 @@ public class Trie {
 
     /**
      *Deletes the given node and all unnecessary related nodes
-     * @param key
-     * @return
+     * @param key name of student
+     * @return true when child is found
      */
     public boolean remove(String key) {
         Node nodeToRemove = root.find(key);
 
-        if (nodeToRemove != null) {
+        if (nodeToRemove != null && nodeToRemove.getPoints() != null) {
             nodeToRemove.remove();
             return  true;
         }
@@ -66,7 +66,7 @@ public class Trie {
 
         Node nodeToChange = root.find(key);
 
-        if (nodeToChange != null) {
+        if (nodeToChange != null && nodeToChange.getPoints() != null) {
             nodeToChange.setPoints(points);
             return true;
         }
@@ -80,7 +80,7 @@ public class Trie {
      */
     public Integer points(String key) {
         Node n = root.find(key);
-        if (n != null) {
+        if (n != null && n.getPoints() != null) {
             return n.getPoints();
         }
             return -1;
@@ -91,7 +91,7 @@ public class Trie {
      * @return a string that presents the current trie
      */
     public String toString() {
-        if (root != null){
+        if (root != null) {
             String output = "+";
             output += root.toString();
             return output;

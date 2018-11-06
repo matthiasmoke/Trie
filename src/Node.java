@@ -51,20 +51,24 @@ public class Node {
      * @return end-node or null if no node is found
      */
     public Node find(String key) {
-        char[] characters = key.toLowerCase().toCharArray();
+        if (isValidName(key)) {
+            char[] characters = key.toLowerCase().toCharArray();
 
-        //Navigate through the trie
-        Node currChild = getChild(characters[0]);
+            //Navigate through the trie to find given node
+            Node currChild = getChild(characters[0]);
 
-        for (int i = 1; i < characters.length; i++) {
+            for (int i = 1; i < characters.length; i++) {
 
-            if (currChild != null) {
-                currChild = currChild.getChild(characters[i]);
-            } else {
-                return null;
+                if (currChild != null) {
+                    currChild = currChild.getChild(characters[i]);
+                } else {
+                    return null;
+                }
             }
+            return currChild;
+        } else {
+            return null;
         }
-        return currChild;
     }
 
     /**
@@ -72,7 +76,9 @@ public class Node {
      */
     public void remove() {
         points = null;
-        cleanUp();
+        if (!hasChildren()) {
+            cleanUp();
+        }
     }
 
     /**
@@ -84,7 +90,7 @@ public class Node {
         boolean hasChildren = false;
         //Create string for this node and execute toString() for children
         for (int i = 0; i < children.length; i++) {
-            if (children[i] != null){
+            if (children[i] != null) {
                 hasChildren = true;
                 b.append(children[i].ch);
 
@@ -105,7 +111,7 @@ public class Node {
 
     /**
      *Sets the points value of the node
-     * @param points
+     * @param points points value
      */
     public  void setPoints(Integer points) {
         this.points = points;
@@ -185,5 +191,19 @@ public class Node {
         } else {
             return "";
         }
+    }
+
+    /**
+     * Checks if given string is a valid name without numbers in it
+     * @param name name to check
+     * @return true if name is valid
+     */
+    private boolean isValidName(String name) {
+        try {
+            Integer.parseInt(name);
+        } catch (NumberFormatException e) {
+            return true;
+        }
+        return false;
     }
 }

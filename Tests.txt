@@ -1,55 +1,35 @@
-trie> 
-add lea 12
-trie> PASS: add lea 12 
-add hans 5
-trie> PASS: add hans 5 
-add paul 20
-trie> PASS: add paul 20 
-add lena 23
-trie> PASS: add lena 23 
-add paula 15
-trie> PASS: add paula 15 
-trie
-+(h(a(n(s[5]))))(l(e(a[12])(n(a[23]))))(p(a(u(l(a[15])[20]))))
-trie> 
-FAIL: trie (expected "+(h(a(n(s[5])))l(e(a[12]n(a[23])))p(a(u(l[20](a[15])))))") 
-delete paul
-trie> PASS: delete paul 
-trie
-+(h(a(n(s[5]))))(l(e(a[12])(n(a[23]))))
-trie> 
-FAIL: trie (expected "+(h(a(n(s[5])))l(e(a[12]n(a[23])))p(a(u(l(a[15])))))") 
-points lea
-12
-trie> PASS: points lea 
-points hans
-5
-trie> PASS: points hans 
-points paul
-Error! No value saved
-trie> PASS: points paul
-points paula
-Error! No value saved
-trie> 
-FAIL: points paula (got error, but expected "15") 
-points lena
-23
-trie> PASS: points lena 
-points
-trie> 
-FAIL: points (expected error message)
-add
-trie> 
-FAIL: add (expected error message)
-change
-trie> 
-FAIL: change (expected error message)
-delete 5432
-Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: -44
-	at Node.getChild(Node.java:34)
-	at Node.find(Node.java:46)
-	at Trie.remove(Trie.java:44)
-	at Shell.delete(Shell.java:134)
-	at Shell.evalInput(Shell.java:87)
-	at Shell.runShell(Shell.java:32)
-	at Shell.main(Shell.java:15)
+Basic functionality:
+trie> add hans 4
+trie> add paul 3
+trie> add paula 4
+trie> add peter 6
+trie> trie
++(h(a(n(s[4])))p(a(u(l[3](a[4])))e(t(e(r[6])))))
+trie> points hans
+4
+trie> change hans 7
+trie> points hans
+7
+trie> delete paula
+trie> trie
++(h(a(n(s[7])))p(a(u(l[3]))e(t(e(r[6])))))
+trie> add perter
+Error! No valid input
+trie> add peter 5
+Error! Could not add peter
+
+Checked if fixed bug still occurs:
+add paula 5
+trie> add paul 8
+trie> trie
++(p(a(u(l[8](a[5])))))
+trie> delete paul
+trie> trie
++(p(a(u(l(a[5])))))
+
+Checked if fixed bug still occurs:
+trie> add oll 4
+trie> delete 456
+Error! Could not delete 456
+trie> delete 5565
+Error! Could not delete 5565

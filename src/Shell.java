@@ -14,14 +14,14 @@ public final class Shell {
     /**
      *Private constructor
      */
-    private Shell(){
+    private Shell() {
 
     }
 
     /**
      *Main method that executes the shell
-     * @param args
-     * @throws IOException
+     * @param args main
+     * @throws IOException on unexpected error
      */
     public static void main(String[] args) throws IOException {
         BufferedReader shellReader = new BufferedReader(
@@ -32,7 +32,7 @@ public final class Shell {
     /**
      *Method that runns the shell
      * @param reader Reader for user input
-     * @throws IOException
+     * @throws IOException on unexpected error
      */
     private  static  void runShell(BufferedReader reader) throws IOException {
         run = true;
@@ -56,12 +56,12 @@ public final class Shell {
         Scanner sc =  new Scanner(input);
         sc.useDelimiter("\\s+");
 
-        if (sc.hasNext()){
+        if (sc.hasNext()) {
 
             String studentName = "";
             int points = -1;
 
-            switch (sc.next()){
+            switch (sc.next()) {
                 case "new":
                     trie = new Trie();
                     break;
@@ -99,14 +99,9 @@ public final class Shell {
 
                 case "points":
                     if (sc.hasNext()) {
-                        int p = trie.points(sc.next());
-                        if (p >= 0) {
-                            System.out.println(p);
-                        } else {
-                            System.out.println("Error! No value saved");
-                        }
-
+                        studentName = sc.next();
                     }
+                    points(studentName);
                     break;
 
                 case "trie":
@@ -126,6 +121,19 @@ public final class Shell {
             }
         }
         sc.close();
+    }
+
+    private static void points(String name) {
+        if (!name.equals("")) {
+            int p = trie.points(name);
+            if (p >= 0) {
+                System.out.println(p);
+            } else {
+                System.out.println("Error! No value saved");
+            }
+        } else {
+            printErrorMessage();
+        }
     }
 
     private static void add(String name, Integer points) {
